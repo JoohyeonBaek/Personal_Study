@@ -1,0 +1,40 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.*;
+
+public class Main {
+	public static void check(int[] arrN, int[] arrM) {
+		for(int i=0; i<arrM.length; i++) {
+			for(int j=0; j<arrN.length; j++) {
+				if(arrM[i] == arrN[j]) {
+					System.out.println("1");
+					break;
+				}
+				else if(j==arrM.length-1) {					
+					System.out.println("0");
+				}
+			}
+		}
+		
+	}
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] arrN = new int[n];
+		for(int i=0; i<n; i++)
+			arrN[i] = sc.nextInt();
+		int m = sc.nextInt();
+		int[] arrM = new int[m];
+		for(int i=0; i<m; i++)
+			arrM[i] = sc.nextInt();
+		
+		check(arrN,arrM);
+		
+		
+		
+		
+	}
+		
+}
+

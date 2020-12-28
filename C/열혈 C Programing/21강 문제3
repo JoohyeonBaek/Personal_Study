@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int FindSpace(char * str)
+{
+	int i;
+	for(i=0;i<strlen(str);i++)
+	{
+		if(str[i]=='0')
+			return i;
+	}
+}
+	
+int ConvertAge(char * str , int space)
+{
+	char temp[100];
+	strcpy(temp,str);
+
+	for(int i=space-1;i>=0;i--)
+		temp[i]=0;
+	
+	temp[strlen(temp)]=0;
+	
+	return atoi(temp);
+
+}
+
+int main()
+{
+
+	char str1[100];
+	char str2[100];
+	int i,j;
+
+	fgets(str1,sizeof(str1),stdin);
+	fgets(str2,sizeof(str2),stdin);
+	
+	i=FindSpace(str1);
+	j=FindSpace(str2);
+
+	if(i==j)
+	{
+		if(!strncmp(str1,str2,i))
+			printf("이름이 같습니다 , ");
+		else
+			printf("이름이 다릅니다 , ");
+	}
+
+	else
+		printf("이름이 다릅니다 , ");
+
+	
+	
+	if(ConvertAge(str1,i) == ConvertAge(str2,j))
+		printf("나이가 같습니다\n");
+	else
+		printf("나이가 다릅니다\n");
+
+	return 0;
+	
+}

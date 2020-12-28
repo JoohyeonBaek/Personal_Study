@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main {		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		if(n==0) {
+			System.out.println("0");
+			return;
+		}
+		
+		int zeroCount = 0;
+    // 5의 배수 곱할 시 0의 개수 1개증가
+    // 25의 배수 곱할 시 0의 개수 2개증가
+    // 125의 배수 곱할 시 0의 개수 3개증가
+		for(int i=2; i<=n; i++) {
+			if(i%5==0) zeroCount++;     
+			if(i%25==0) zeroCount++;
+			if(i%125==0) zeroCount++;
+		}
+		
+		System.out.println(zeroCount);
+		
+	}
+}
+

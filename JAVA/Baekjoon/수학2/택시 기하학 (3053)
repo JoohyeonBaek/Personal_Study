@@ -1,0 +1,12 @@
+import java.util.*;
+
+public class Main {	
+	public static void main(String[] args) throws Exception {
+		int r;
+		Scanner sc = new Scanner(System.in);
+		r = sc.nextInt();
+		
+		System.out.println(Math.pow(r, 2)*Math.PI);
+		System.out.println(Math.pow(r*2, 2) / 2);
+	}
+}

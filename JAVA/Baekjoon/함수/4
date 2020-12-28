@@ -1,0 +1,21 @@
+//팩토리얼값 출력 프로그램
+#include<stdio.h>
+
+int Fact(int x)
+{
+	int result=1;
+	for(int i=x;i>0;i--)
+		result*=i;
+
+	return result;
+		
+}
+
+int main()
+{
+	int n;
+	scanf("%d",&n);
+
+	printf("%d\n",Fact(n));
+	return 0;
+}

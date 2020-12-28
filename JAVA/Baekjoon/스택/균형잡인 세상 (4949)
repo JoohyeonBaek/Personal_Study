@@ -1,0 +1,57 @@
+import java.util.*;
+
+public class Main {
+		public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);
+						
+			while(true) {
+				String str = "";
+				
+				while(true) {
+					str += sc.nextLine();
+					if(str.equals("."))		// 종료
+						return;
+					else if(str.charAt(str.length()-1) == '.')						
+						break;											
+				}
+				
+				
+				Stack<Character> stack = new Stack<Character>();
+				for(int i=0; i<str.length(); i++) {
+					if(str.charAt(i) == '[' || str.charAt(i) == '(')
+						stack.push(str.charAt(i));
+					
+					else if(str.charAt(i) == ']') {
+						if(stack.empty()) {							
+							stack.add(']');
+							break;
+						}
+						else if(stack.get(stack.size()-1) == '[')
+							stack.pop();
+						
+						else if(stack.get(stack.size()-1) == '(') {							
+							break;
+						}							
+					}
+					
+					else if(str.charAt(i) == ')') {
+						if(stack.empty()) {							
+							stack.add(']');
+							break;
+						}	
+						else if(stack.get(stack.size()-1) == '(')
+							stack.pop();
+															
+						else if( stack.get(stack.size()-1) == '[') {							
+							break;
+						}
+					}					
+				}
+				if(stack.empty())
+					System.out.println("yes");
+				else
+					System.out.println("no");
+			}			
+		}		
+}
+

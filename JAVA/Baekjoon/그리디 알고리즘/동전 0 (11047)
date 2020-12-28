@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main {		
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] coinArr = new int[n];
+		for(int i=0; i<n; i++)
+			coinArr[i] = sc.nextInt();
+		
+		int answer = 0;
+		int sum = k;		
+		
+		for(int i=n-1; i>=0; i--) {
+			if(coinArr[i]<=sum) {
+				answer += sum/coinArr[i];
+				sum -= (sum/coinArr[i]) * coinArr[i];
+				if(sum==0)
+					break;
+			}
+		}
+		
+		System.out.println(answer);		
+		
+	}
+}

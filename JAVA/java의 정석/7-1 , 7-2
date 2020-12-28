@@ -1,0 +1,75 @@
+import java.util.*;
+
+
+public class Main {	
+	public static void main(String[] args) {
+	
+		SutdaDeck deck = new SutdaDeck();
+		
+		System.out.println(deck.pick(0));
+		System.out.println(deck.pick());
+		deck.shuffle();
+		
+		for(int i=0; i<deck.cards.length; i++)
+			System.out.print(deck.cards[i]+", ");
+		
+		System.out.println();
+		System.out.println(deck.pick(0));	
+	}
+} 
+
+class SutdaDeck {
+	final int CARD_NUM = 20;
+	SutdaCard [] cards = new SutdaCard[CARD_NUM]; // 인스턴스를 저장하기위한 공간 , 인스턴스생성 X
+	
+	SutdaDeck() { // 배열 초기화		
+		for(int i=0; i<cards.length; i++) {
+			int num=i%10+1;
+			boolean isKwang = (num==1 || num==3 || num==8) && (i<10);
+			
+			cards[i] = new SutdaCard(num,isKwang); // 인스턴스 생성
+		}
+	}
+	
+	void shuffle() { // 배열 cards에 담긴 카드의 위치를 뒤섞음
+		
+		for(int i=0; i<cards.length; i++) {
+			int j = (int)(Math.random()*cards.length);
+			SutdaCard temp = cards[j];
+			cards[j] = cards[i];
+			cards[i] = cards[j];
+			
+		}
+	}
+	
+	SutdaCard pick(int index) { // 배열 cards에서 지정된 위치의 SutdaCard반환
+		return cards[index];
+		
+	}
+	
+	SutdaCard pick() { // 배열 cards에서 임의의 위치의 SutdaCard반환
+		int random_index = (int)(Math.random()*cards.length);
+		return cards[random_index];
+	}
+	
+	
+}
+  
+
+class SutdaCard {
+	int num;
+	boolean isKwang;
+	
+	SutdaCard() {
+		this(1,true);
+	}
+	
+	SutdaCard(int num, boolean isKwang) {
+		this.num = num;
+		this.isKwang = isKwang;
+	}
+	
+	public String toString() {
+		return num + (isKwang ? "K" : "");
+	}
+}

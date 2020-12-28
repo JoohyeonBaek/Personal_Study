@@ -1,0 +1,45 @@
+//다양한 형태의 구조체 정의
+#include<stdio.h>
+
+typedef struct point{
+	int xpos;
+	int ypos;
+}Point;
+
+typedef struct rectangle{
+	Point leftpos;
+	Point rightpos;
+}Rectangle;
+
+int Area(Rectangle pos)
+{
+	return (pos.rightpos.xpos-pos.leftpos.xpos) * (pos.rightpos.ypos-pos.leftpos.ypos);
+}
+
+void Information(Rectangle pos)
+{
+	Point leftup;
+	Point rightdown;
+
+	leftup.xpos = pos.leftpos.xpos;
+	leftup.ypos = pos.rightpos.ypos;
+
+	rightdown.xpos = pos.rightpos.ypos;
+	rightdown.ypos = pos.leftpos.ypos;
+
+	printf("네 점의 좌표정보 (%d,%d),(%d,%d),(%d,%d),(%d,%d)\n",pos.leftpos.xpos,pos.leftpos.ypos,leftup.xpos,leftup.ypos,pos.rightpos.xpos,pos.rightpos.ypos,rightdown.xpos,rightdown.ypos);
+}
+
+
+int main()
+{
+	int area;
+	Rectangle pos = {0,0,100,100};
+
+	area=Area(pos);
+
+	printf("직사각형의 넓이 : %d\n",area);
+	Information(pos);
+	
+	return 0;
+}

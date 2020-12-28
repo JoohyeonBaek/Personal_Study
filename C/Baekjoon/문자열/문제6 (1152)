@@ -1,0 +1,46 @@
+// https://www.acmicpc.net/problem/1152
+/*
+영어 대소문자와 띄어쓰기만으로 이루어진 문자열이 주어진다.
+이 문자열에는 몇 개의 단어가 있을까? 이를 구하는 프로그램을 작성하시오. 단, 한 단어가 여러 번 등장하면 등장한 횟수만큼 모두 세어야 한다.
+*/
+
+#include<stdio.h>
+#include<string.h>
+
+int StdWordCount(char * str,int len)
+{
+	int cnt=1;
+	for(int i=0;i<len;i++)
+	{
+		if(str[i]==' ')
+			cnt+=1;
+	}
+	return cnt;
+}
+
+int main()
+{
+	char str[1000000];
+	int len,count;
+
+	fgets(str,sizeof(str),stdin);
+	str[strlen(str)-1]=0;
+	len=strlen(str);
+
+
+	if(str[0]==' ' && str[len-1]==' ')
+		count=StdWordCount(str,len)-2;
+	else if(str[0]==' ' || str[len-1]==' ')
+		count=StdWordCount(str,len)-1;
+	else	
+		count=StdWordCount(str,len);
+
+	printf("%d\n",count);
+	
+	return 0;
+}
+
+/*
+띄어쓰기에는 NULL이 아니라 빈칸이 들어감
+NULL != ' '
+*/

@@ -1,0 +1,46 @@
+/*
+간단한 도서 관리용 프로그램을 작성해보자.
+[제목,저자명,페이지수]에 대한 정보를 저장할 수 잇는 구조체를 정의하고, 구조체배열을 선언해서 도서에 대한 정보를 저장하는 구조로 작성해보자.
+main함수에서는 사용자로부터 3권의 도서에 대한 정보를 입력받고, 입력이 끝나면 도서에 대한 내용을 출력해 주도록 하자.
+*/
+
+#include<stdio.h>
+
+typedef struct bookinform{
+	char writer[10];
+	char title[30];
+	int page;
+}BookInform;
+
+int main()
+{
+	BookInform book[3];
+
+	int i,j;
+	
+	printf("도서 정보 입력\n");
+	for(i=0;i<3;i++)
+	{
+		printf("저자: ");
+		gets(book[i].writer);
+		printf("제목: ");
+		gets(book[i].title);
+		printf("페이지수: ");
+		scanf("%d",&book[i].page);
+		getchar();
+	}
+	
+	printf("\n");
+
+	for(j=0;j<3;j++)
+	{
+		printf("book%d\n",j+1);
+		printf("저자:%s\n",book[j].writer);
+		printf("제목:%s\n",book[j].title);
+		printf("페이지수:%d\n",book[j].page);
+	}
+
+	return 0;
+}
+
+//반복문 안에서 i,j를 선언했을 때 오류난 이유찾아보기

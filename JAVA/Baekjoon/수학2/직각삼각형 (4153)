@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Main {
+	static void check(int a, int b, int c) {		
+		if(a==0 && b==0 && c==0)
+			return;
+		else {
+			int[] temp_arr = {a,b,c};
+			sort(temp_arr);
+			a = temp_arr[0];
+			b = temp_arr[1];
+			c = temp_arr[2];			
+			if(a*a + b*b == c*c)
+				System.out.println("right");
+			else
+				System.out.println("wrong");
+		}		
+	}
+	
+	static void sort(int[]arr) {		
+		for(int i=0; i<arr.length-1; i++) {
+			for(int j=i+1; j<arr.length; j++) {
+				if(arr[i] > arr[j]) {
+					int temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+		}		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		int a,b,c;
+		Scanner sc = new Scanner(System.in);		
+		do {
+			a = sc.nextInt();
+			b = sc.nextInt();
+			c = sc.nextInt();
+			check(a,b,c);
+		} while(a!=0 && b!=0 && c!=0);
+	}
+}

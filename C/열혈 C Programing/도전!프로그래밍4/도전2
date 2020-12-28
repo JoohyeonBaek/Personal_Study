@@ -1,0 +1,48 @@
+/*
+도전1에서 구현한 프로그램(도서관리프로그램)에 변경을 조금가하자.
+구조체 배열을 선언하는 것이 아니라 구조체 포언터 배열을 선언하고 구조체 변수를 동적으로 할당하는 형태로 프로그램을 재 구현해 보자.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct bookinform{
+	char writer[10];
+	char title[30];
+	int page;
+}BookInform;
+
+
+int main()
+{
+	
+	BookInform * ptr[3];
+	
+	int i,j;
+
+		
+	printf("도서 정보 입력\n");
+	for(i=0;i<3;i++)
+	{
+		ptr[i]=(BookInform*)malloc(sizeof(BookInform));
+		printf("저자: ");
+		gets(ptr[i]->writer);
+		printf("제목: ");
+		gets(ptr[i]->title);
+		printf("페이지수: ");
+		scanf("%d",&ptr[i]->page);
+		getchar();
+	}
+	
+	printf("\n");
+
+	for(j=0;j<3;j++)
+	{
+		printf("book%d\n",j+1);
+		printf("저자:%s\n",ptr[j]->writer);
+		printf("제목:%s\n",ptr[j]->title);
+		printf("페이지수:%d\n",ptr[j]->page);
+	}
+
+	return 0;
+}

@@ -1,0 +1,72 @@
+import java.util.*;
+
+public class Main {	
+	public static char[][] sliceArr(char[][] board, int i, int j) {
+		char[][] chess = new char[8][8];
+		for(int k=0; k<8; k++) {
+			for(int l=0; l<8; l++) {
+				chess[k][l] = board[i+k][j+l];
+			}
+		}		
+		return chess;
+	}
+	
+	public static int minPaint(char[][] chess) {
+		int min1 = 0, min2 = 0;
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(i%2==0) {
+					if(j%2==0 && chess[i][j]=='B')
+						min1++;
+					else if(j%2==1 && chess[i][j]=='W')
+						min1++;
+					
+					if(j%2==0 && chess[i][j]=='W')
+						min2++;
+					else if(j%2==1 && chess[i][j]=='B')
+						min2++;
+				}
+				else {
+					if(j%2==0 && chess[i][j]=='W')
+						min1++;
+					if(j%2!=0 && chess[i][j]=='B')
+						min1++;
+					
+					if(j%2==0 && chess[i][j]=='B')
+						min2++;
+					else if(j%2==1 && chess[i][j]=='W')
+						min2++;
+				}						
+			}
+		}		
+		
+		if(min1<min2)
+			return min1;
+		else
+			return min2;
+		
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		int min = -1;
+		char[][] board = new char[n][m];
+		
+		for(int i=0; i<n; i++) {
+			String temp = sc.next();
+			for(int j=0; j<temp.length(); j++) 
+				board[i][j] = temp.charAt(j); 
+		}
+		
+		for(int i=0; i<=board.length-8; i++) {
+			for(int j=0; j<=board[i].length-8; j++) {
+				char[][] chess = new char[8][8];
+				chess = sliceArr(board,i,j);				
+				if(min > minPaint(chess) || min == -1)
+					min = minPaint(chess);				
+			}
+		}		
+		System.out.println(min);			
+	}
+}

@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+	public static int factorial(int n) {
+		int factorial = 1;
+		for(int i=n; i>0; i--)
+			factorial *= i;
+		return factorial;
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();		
+		if(k<0)
+			System.out.println("0");
+		else if(k>n)
+			System.out.println("0");
+		else {
+			System.out.println(factorial(n) / (factorial(k) * factorial(n-k)));
+		}		
+	}
+}

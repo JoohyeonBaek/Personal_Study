@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Main {
+	static String find(int x) {
+		int temp; // 분자 분모
+		if(x==1)
+			return "1/1";
+		else {
+			for(int i=1; i<1000000; i++) {
+				if(x>=2+((i+2)*(i-1))/2 && x<=3+((i+4)*(i-1))/2) {
+					temp = Math.abs(x - (2 + ((i+2)*(i-1))/2));
+					if(i%2 != 0)
+						return Integer.toString(1+temp) + "/" + Integer.toString(i+1-temp);
+					else
+						return Integer.toString(i+1-temp) + "/" + Integer.toString(1+temp);
+				}
+			}
+		}
+		return "-1";		
+	}	
+	public static void main(String[] args) {
+		int x;
+		Scanner sc = new Scanner(System.in);
+		x = sc.nextInt();
+		
+		System.out.println(find(x));
+	}
+}

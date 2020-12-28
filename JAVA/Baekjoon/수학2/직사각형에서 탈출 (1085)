@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main {	
+	public static void main(String[] args) throws Exception {
+		int x,y,w,h;
+		Scanner sc = new Scanner(System.in);
+		int[] distance_arr = new int[4];
+		int min;
+		
+		x = sc.nextInt();
+		y = sc.nextInt();
+		w = sc.nextInt();
+		h = sc.nextInt();
+		
+		distance_arr[0] = x;
+		distance_arr[1] = y;
+		distance_arr[2] = w-x;
+		distance_arr[3] = h-y;
+		min = distance_arr[0];
+		
+		for(int i=1; i<4; i++) {
+			if(min > distance_arr[i])
+				min = distance_arr[i];
+		}		
+		System.out.println(min);		
+	}
+}

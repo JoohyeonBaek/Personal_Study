@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Main {	
+	public static void main(String[] args) throws Exception {
+		int[] x = new int[3];
+		int[] y = new int[3];
+		int answer_x, answer_y;
+		Scanner sc = new Scanner(System.in);
+		
+		for(int i=0; i<3; i++) {
+			x[i] = sc.nextInt();
+			y[i] = sc.nextInt();
+		}
+		
+		if(x[0]==x[1])
+			answer_x = x[2];
+		else if(x[0] == x[2])
+			answer_x = x[1];
+		else
+			answer_x = x[0];
+		
+		if(y[0]==y[1])
+			answer_y = y[2];
+		else if(y[0] == y[2])
+			answer_y = y[1];
+		else
+			answer_y = y[0];
+		
+		System.out.println(answer_x + " " + answer_y);
+	}
+}

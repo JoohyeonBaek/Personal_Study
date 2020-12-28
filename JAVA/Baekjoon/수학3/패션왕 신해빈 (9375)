@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Main {	
+	public static int[] classificationCloth(List<String>cloth) {
+		int[] clothType = new int[cloth.size()/2];
+		int clothTypeIndex = 0;
+		for(int i=1; i<cloth.size(); i+=2) {			
+			if(cloth.get(i).equals("check"))
+				continue;
+			else {
+				int clothCount = 1;
+				for(int j=i+2; j<cloth.size(); j+=2) {
+					if(cloth.get(i).equals(cloth.get(j))) {
+						cloth.set(j, "check");
+						clothCount++;						
+					}					
+				}
+				clothType[clothTypeIndex] = clothCount;
+				clothTypeIndex++;
+			}
+		}		
+		return clothType;
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int t = sc.nextInt();
+		for(int i=0; i<t; i++) {
+			int answer = 1;
+			int count = sc.nextInt();
+			sc.nextLine();					
+			List<String>cloth = new ArrayList<String>();
+			for(int j=0; j<count; j++) {
+				String inputCloth = sc.nextLine();
+				String [] inputClothSplit = inputCloth.split("\\s");
+				cloth.add(inputClothSplit[0]);
+				cloth.add(inputClothSplit[1]);
+			}
+			int[] clothType = classificationCloth(cloth);
+			for(int j=0; j<clothType.length; j++)
+				answer *= clothType[j]+1;
+			System.out.println(answer-1);
+		}		
+	}
+}
+

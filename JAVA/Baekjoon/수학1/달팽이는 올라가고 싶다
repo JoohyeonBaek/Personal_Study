@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Main {
+	static int find(int A, int B, int V) {
+		int day = (V-B) / (A-B);
+		if((V-B) % (A-B) != 0)
+			day++;
+		return day;		
+	}	
+	public static void main(String[] args) {
+		int A,B,V;
+		Scanner sc = new Scanner(System.in);
+		A = sc.nextInt();
+		B = sc.nextInt();
+		V = sc.nextInt();
+		
+		System.out.println(find(A,B,V));
+	}
+}

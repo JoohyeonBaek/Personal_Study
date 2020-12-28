@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Main {
+	public static StringBuilder sb = new StringBuilder();
+	public static void hanoi(int n, int from, int by, int to) {
+		if(n==1) {			
+			sb.append(from +" "+to+"\n");
+		}
+			
+		else {
+			hanoi(n-1,from,to,by);			
+			sb.append(from+" "+to+"\n");
+			hanoi(n-1,by,from,to);
+		}
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int k = sc.nextInt();
+		System.out.println((int)(Math.pow(2, k)-1));
+		hanoi(k,1,2,3);
+		System.out.println(sb.toString());
+		
+	}
+}
+
+
+// StringBuilder 사용 (문자열 연결 많을 시 유리)
+// 1->3->2로 일단 쌓고 (n-1개)
+// 1->3 하나 옮기고 (가장 큰 원판)
+// 2->1->3 으로 옮김 (n-1개)

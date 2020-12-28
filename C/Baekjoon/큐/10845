@@ -1,0 +1,113 @@
+// https://www.acmicpc.net/problem/10845
+/*
+정수를 저장하는 큐를 구현한 다음, 입력으로 주어지는 명령을 처리하는 프로그램을 작성하시오.
+
+명령은 총 여섯 가지이다.
+
+push X: 정수 X를 큐에 넣는 연산이다.
+pop: 큐에서 가장 앞에 있는 정수를 빼고, 그 수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+size: 큐에 들어있는 정수의 개수를 출력한다.
+empty: 큐가 비어있으면 1, 아니면 0을 출력한다.
+front: 큐의 가장 앞에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
+*/
+#include<stdio.h>
+#include<string.h>
+
+typedef struct queue {
+	int data[100001];
+	int front;
+	int back;
+}Queue;
+
+void ClearQueue(Queue* pqueue)
+{
+	memset(pqueue->data, NULL, sizeof(pqueue->data));
+	pqueue->front = -1;
+	pqueue->back = -1;
+}
+
+void Push(Queue* pqueue,int inputdata)
+{
+	pqueue->back++;
+	pqueue->data[pqueue->back] = inputdata;
+}
+
+void Pop(Queue* pqueue)
+{
+	if (pqueue->back == -1) // queue empty
+		printf("-1\n");
+	else
+	{
+		printf("%d\n", pqueue->data[pqueue->front + 1]);
+		pqueue->data[pqueue->front + 1] = NULL;		
+		memmove(pqueue->data, pqueue->data + 1, sizeof(pqueue->data) - 4);
+		pqueue->back--;
+	}
+}
+
+void Size(Queue* pqueue)
+{
+	printf("%d\n", pqueue->back + 1);
+}
+
+void Empty(Queue* pqueue)
+{
+	if (pqueue->back == -1)
+		printf("1\n");
+	else
+		printf("0\n");
+}
+
+void Front(Queue* pqueue)
+{
+	if (pqueue->back == -1)
+		printf("-1\n");
+	else
+		printf("%d\n", pqueue->data[pqueue->front + 1]);
+}
+
+void Back(Queue* pqueue)
+{
+	if (pqueue->back == -1)
+		printf("-1\n");
+	else
+		printf("%d\n", pqueue->data[pqueue->back]);
+}
+
+int main()
+{
+	Queue queue;
+	char command[10];
+	int repeat_command,data;
+
+	ClearQueue(&queue);
+	scanf("%d", &repeat_command);
+
+	for (int i = 0; i < repeat_command; i++)
+	{
+		scanf("%s", command);
+
+		if (!strcmp(command, "push"))
+		{
+			scanf("%d", &data);
+			Push(&queue, data);
+		}
+		else if (!strcmp(command, "pop"))
+			Pop(&queue);
+
+		else if (!strcmp(command, "size"))
+			Size(&queue);
+
+		else if (!strcmp(command, "empty"))
+			Empty(&queue);
+
+		else if (!strcmp(command, "front"))
+			Front(&queue);
+
+		else if (!strcmp(command, "back"))
+			Back(&queue);
+	}
+
+	return 0;
+}

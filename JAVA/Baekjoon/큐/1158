@@ -1,0 +1,85 @@
+// https://www.acmicpc.net/problem/1158
+/*
+조세퍼스 문제는 다음과 같다.
+
+1번부터 N번까지 N명의 사람이 원을 이루면서 앉아있고, 양의 정수 K(≤ N)가 주어진다.
+이제 순서대로 K번째 사람을 제거한다. 한 사람이 제거되면 남은 사람들로 이루어진 원을 따라 이 과정을 계속해 나간다.
+이 과정은 N명의 사람이 모두 제거될 때까지 계속된다. 원에서 사람들이 제거되는 순서를 (N, K)-조세퍼스 순열이라고 한다.
+예를 들어 (7, 3)-조세퍼스 순열은 <3, 6, 2, 7, 5, 1, 4>이다.
+N과 K가 주어지면 (N, K)-조세퍼스 순열을 구하는 프로그램을 작성하시오.
+*/
+#include<stdio.h>
+#include<string.h>
+
+typedef struct queue {
+	int people[5001];
+	int front, back;
+}Queue;
+
+void ClearQueue(Queue* pqueue)
+{
+	pqueue->front = 1;
+	pqueue->back = 0;
+}
+
+void Put(Queue* pqueue, int data)
+{
+	if (pqueue->back == 5000)
+		return;
+	else
+	{
+		pqueue->back++;
+		pqueue->people[pqueue->back] = data;
+	}
+}
+
+int Get(Queue* pqueue)
+{
+	int get_data;
+
+	if (pqueue->back == 0)
+		return NULL;
+	else
+	{
+		get_data = pqueue->people[pqueue->front];
+		pqueue->people[pqueue->front] = NULL;
+		memmove(pqueue->people, pqueue->people + 1, sizeof(int)*pqueue->back);
+		pqueue->back--;
+		return get_data;
+	}
+}
+
+int main()
+{
+	Queue queue;
+	int Josephus[5000], index = 0;
+	int people_num, delete_num;
+	ClearQueue(&queue);
+	
+	scanf("%d %d", &people_num, &delete_num);
+
+	for (int i = 1; i <= people_num; i++)
+		Put(&queue, i);
+
+	printf("<");
+	while (!queue.back==0)
+	{
+		for (int j = 1; j <= delete_num; j++)
+		{
+			if (j == delete_num)
+			{
+				Josephus[index] = Get(&queue);
+				if (queue.back == 0)
+					printf("%d", Josephus[index]);
+				else
+					printf("%d, ",Josephus[index]);
+				index++;
+			}
+			else
+				Put(&queue, Get(&queue));
+		}		
+	}
+	puts(">");
+		
+	return 0;
+}

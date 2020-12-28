@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+	static int find(int n) {
+		if(n==1)
+			return 1;
+		else {
+			for(int i=1; i<=100000; i++) {
+				if( 3*i*i - 3*i + 2 <=n && 3*i*i + 3*i + 1 >=n)
+					return i+1;
+			}
+		}
+		return -1;		
+	}
+  
+	public static void main(String[] args) throws Exception {
+		int n;		
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		
+		System.out.println(find(n));		
+	}
+}

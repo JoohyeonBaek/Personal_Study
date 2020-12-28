@@ -1,0 +1,138 @@
+/*
+전화번호 관리 프로그램을 작성해보자. 이프로그램이 기본적으로 지녀야 하는 기능은 다음과 같다
+
+-입력         이름과 전화번호의 입력
+-삭제         이름을 입력하여 해당 이름의 정보 삭제
+-검색         이름을 입력하여 해당 이름의 정보 출력
+-전체출력     저장된 모든 이름과 전화번호 정보를 출력  
+-종료         프로그램종료
+*/
+
+#include<stdio.h>
+#include<string.h>
+
+int stacknum=0;
+
+typedef struct userinform{
+	char name[10];
+	char telnum[20];
+}UserInform;
+
+int main()
+{
+	UserInform user[10];
+	int insert;
+	int i;
+	char searchname[10] , deletename[10];
+	char temp[10]={0};
+
+	while(1)
+	{
+		puts("***** MENU *****\n");
+		puts("1. Insert\n");
+		puts("2. Delete\n");
+		puts("3. Search\n");
+		puts("4. Print All\n");
+		puts("5.Exit\n");		
+INSERT:
+		printf("Choose the item: ");
+		scanf("%d",&insert);
+		getchar();
+		printf("\n");
+
+		if(insert==1) //insert
+		{
+			puts("[INSERT]");
+			printf("Input Name: ");
+			fgets(user[stacknum].name,sizeof(user[stacknum].name),stdin);
+			user[stacknum].name[strlen(user[stacknum].name)-1]=0;
+			printf("Input Number: ");
+			fgets(user[stacknum].telnum,sizeof(user[stacknum].telnum),stdin);
+			stacknum++;
+		}
+		else if(insert==2) //delete
+		{
+			puts("[Delete]");
+			printf("Enter the name you want to delete: ");
+			fgets(deletename,sizeof(searchname),stdin);
+			deletename[strlen(deletename)-1]=0;
+			for(i=0;i<stacknum;i++)
+			{
+				if(!strcmp(user[i].name,deletename)) // 삭제할 이름이 존재할 때
+				{
+					memset(user[i].name,0,sizeof(user[i].name));
+					memset(user[i].telnum,0,sizeof(user[i].telnum));
+					puts("Delete Success!");
+					break;
+				}
+				else if(i==stacknum-1) // 삭제할 이름이 존재하지 않을 때
+				{
+					if(strcmp(user[i].name,searchname))
+					{
+						printf("Can't find %s\n",deletename);
+						break;
+					}
+				}
+			}
+			
+		}
+		else if(insert==3) //search
+		{
+			puts("[Search]");
+			printf("Enter the name you want to search: ");
+			fgets(searchname,sizeof(searchname),stdin);
+			searchname[strlen(searchname)-1]=0;
+			for(i=0;i<stacknum;i++)
+			{
+				if(!strcmp(user[i].name,searchname))
+				{
+					printf("Name: %s     Tel: %s",user[i].name,user[i].telnum);
+					break;
+				}
+				else if(i==stacknum-1)
+				{
+					if(strcmp(user[i].name,searchname))
+					{
+						printf("Can't find %s\n",searchname);
+						break;
+					}
+				}
+			}
+		}
+		else if(insert==(4)) //print all
+		{
+			puts("[Print All Data]");
+			for(i=0;i<stacknum;i++)
+			{
+				if(strcmp(user[i].name,temp))
+					printf("Name: %s     Tel: %s",user[i].name,user[i].telnum);
+			}
+		}
+		else if(insert==5) //exit
+		{
+			puts("[EXIT]");
+			break;
+		}
+		else
+		{
+			puts("Wrong Number! Choose number again!");
+			goto INSERT;
+		}
+		
+	}
+	return 0;
+}
+
+/*
+--목표--
+1.가독성에 신경써서 코드 짜기(함수사용 등등)
+2.Delete 부분에서 자원낭비가 심함
+   ex)
+   user[0],user[1],user[2]에 정보가 입력받은 상황이다.
+   이 상황에서 user[0]의 정보를 삭제하면 구조체 user[0]이 비워진 상태가 유지된다.
+      해결방안
+         1.user[1]의 내용을 user[0]에 ,user[2]의 내용을 user[1]에 저장 (링크드리스트??)
+         2.새로운 정보가 insert 될때 user[3]이 아닌 빈공간 user[0]에 저장
+*/
+        
+   

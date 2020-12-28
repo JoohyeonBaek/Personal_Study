@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Main {
+	static int find(int x, int y) {		
+		int a=0,b=0;
+		if(x==1)
+			a=5000000;
+		else if(x>=2 && x<=3)
+			a=3000000;
+		else if(x>=4 && x<=6)
+			a=2000000;
+		else if(x>=7 && x<=10)
+			a=500000;
+		else if(x>=11 && x<=15)
+			a=300000;
+		else if(x>=16 && x<=21)
+			a=100000;
+		else
+			a=0;
+		
+		if(y==1)
+			b=5120000;
+		else if(y>=2 && y<=3)
+			b=2560000;
+		else if(y>=4 && y<=7)
+			b=1280000;
+		else if(y>=8 && y<=15)
+			b=640000;
+		else if(y>=16 && y<=31)
+			b=320000;
+		else
+			b=0;
+		
+		return a+b;
+	}
+	
+		
+	
+	public static void main(String[] args) throws Exception {
+		int t;
+		int a,b;
+		Scanner sc = new Scanner(System.in);
+		
+		t = sc.nextInt();
+		
+		for(int i=0; i<t; i++) {
+			a = sc.nextInt();
+			b = sc.nextInt();
+			System.out.println(find(a,b));
+		}
+	}
+}
+		

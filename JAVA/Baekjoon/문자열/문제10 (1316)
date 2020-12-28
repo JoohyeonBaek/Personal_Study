@@ -1,0 +1,81 @@
+//https://www.acmicpc.net/problem/1316
+/*
+그룹 단어란 단어에 존재하는 모든 문자에 대해서, 각 문자가 연속해서 나타나는 경우만을 말한다.
+예를 들면, ccazzzzbb는 c, a, z, b가 모두 연속해서 나타나고, kin도 k, i, n이 연속해서 나타나기 때문에 그룹 단어이지만,
+aabbbccb는 b가 떨어져서 나타나기 때문에 그룹 단어가 아니다.
+단어 N개를 입력으로 받아 그룹 단어의 개수를 출력하는 프로그램을 작성하시오.
+*/
+/*
+반례
+2
+abc
+cc
+1
+
+해결 memset을 사용하여 temp함수 초기화
+*/
+
+#include<stdio.h>
+#include<string.h>
+
+
+int CheckGroupNum(char * temp_word, int len) // 그룹단어 판별 함수
+{
+	
+	for(int i=0; i<len-1; i++)
+	{
+		for(int j=i+1;j<len;j++)
+		{
+			if(temp_word[i]==temp_word[j])
+				return 0;
+			
+		}
+	}
+	return 1;
+}
+
+int main()
+{
+	int word_repeat;
+	char word[101];
+	char temp[101]={NULL};
+	int temp_index;
+	int len,temp_len;
+	int gnum=0;
+	
+	
+
+	scanf("%d",&word_repeat);
+	for(int i=0;i<word_repeat;i++)
+	{
+
+		scanf("%s",word);
+		len=strlen(word);
+		memset(temp,NULL,sizeof(temp));
+		temp[0]=word[0];
+		temp_index=0;
+			
+	
+		if(len==1)
+			gnum+=1;
+		else
+		{		
+			for(int j=1;j<len;j++)
+			{
+				if(word[j]!=temp[temp_index])
+				{
+					temp_index+=1;
+					temp[temp_index]=word[j];
+				}
+			}
+			temp_len=strlen(temp);
+			if(temp_len==1)
+				gnum+=1;
+			else
+				gnum+=CheckGroupNum(temp,temp_len);
+		}
+	}
+	
+	printf("%d\n",gnum);
+	return 0; 
+}

@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class Main {
+	static int find(int h, int w, int n) {
+		if(n%h == 0)
+			return h*100 + n/h;
+		else
+			return (n%h)*100 + n/h + 1;		
+	}	
+	public static void main(String[] args) throws Exception {
+		int t;
+		int h,w,n;
+		Scanner sc = new Scanner(System.in);
+    
+		t = sc.nextInt();
+		for(int i=0; i<t; i++) {
+			h = sc.nextInt();
+			w = sc.nextInt();
+			n = sc.nextInt();
+			
+			System.out.println(find(h,w,n));			
+		}		
+	}
+}
+		

@@ -1,0 +1,39 @@
+// 구조체 변수의 연산
+
+#include<stdio.h>
+
+typedef struct point{
+	int xpos;
+	int ypos;
+}Point;
+
+void SwapPoint(Point * pos1,Point * pos2)
+{
+	Point temp;
+	temp.xpos=pos2->xpos;
+	temp.ypos=pos2->ypos;
+
+	pos2->xpos=pos1->xpos;
+	pos2->ypos=pos1->ypos;
+	
+	pos1->xpos=temp.xpos;
+	pos1->ypos=temp.ypos;
+}
+
+void Print(Point pos1, Point pos2)
+{
+	printf("pos1 = %d,%d pos2 = %d,%d\n\n",pos1.xpos,pos1.ypos,pos2.xpos,pos2.ypos);
+}
+
+
+int main()
+{
+	Point pos1 = {2,4};
+	Point pos2 = {5,7};
+
+	Print(pos1,pos2);
+	SwapPoint(&pos1,&pos2);
+	Print(pos1,pos2);
+
+	return 0;
+}

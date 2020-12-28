@@ -1,0 +1,44 @@
+//https://www.acmicpc.net/problem/10809
+/*
+알파벳 소문자로만 이루어진 단어 S가 주어진다. 각각의 알파벳에 대해서
+단어에 포함되어 있는 경우에는 처음 등장하는 위치를, 포함되어 있지 않은 경우에는 -1을 출력하는 프로그램을 작성하시오.
+(단 단어의 첫 번째 글자는 0번째 위치이고, 두 번째 글자는 1번째 위치이다.)
+*/
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+	char word[102];
+	int len;
+	int j=0;
+
+	fgets(word,sizeof(word),stdin);
+	word[strlen(word)-1]=0;
+	len=strlen(word);
+
+	for(char i='a';i<='z';i++)
+	{
+		j=0;
+		while(1)
+		{
+			if(word[j]==i)
+			{
+				printf("%d ",j);
+				break;
+			}					
+			
+			if(word[j]==word[len])
+			{
+				if(word[j]!=i)
+				{
+					printf("-1 ");
+					break;
+				}
+			}
+			j++;
+		}
+	}
+	printf("\n");
+	return 0;
+}

@@ -1,0 +1,22 @@
+// 파일의 크기를 바이트 단위로 계산하기 ( 단 ftell 함수 사용 )
+#include<stdio.h>
+
+long GetFileSize(FILE * fp)
+{
+	long temp , i;
+
+	temp=ftell(fp);
+	fseek(fp,0,SEEK_END);
+	i=ftell(fp);
+	fseek(fp,temp,SEEK_SET);
+	return i;
+}
+
+int main()
+{			
+	FILE * fp = fopen("fuck.txt","rt");
+	printf("FILESIZE = %ld\n",GetFileSize(fp));
+	fclose(fp);
+	return 0;
+}
+

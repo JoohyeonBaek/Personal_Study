@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+	static String[][] starArr = new String[2187][2187];
+	static void initStarArr() {
+		for(int i=0; i<2187; i++) {
+			for(int j=0; j<2187; j++)
+				starArr[i][j] = " ";
+		}
+	}
+	static void checkArr(int n, int x, int y) {
+		if(n==1) {
+			starArr[x][y] = "*";
+			return;
+		}		
+		int div = n/3;
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				if(i==1 && j==1)
+					continue;
+				checkArr(div,x+(div*i),y+(div*j));
+			}
+		}
+	return;		
+	}
+	static void printStarArr() {
+		for(int i=0; i<2187; i++) {
+			for(int j=0; j<2187; j++)
+				System.out.print(starArr[i][j]);
+		}
+		System.out.println();
+	}
+	
+	
+
+	public static void main(String[] args) {
+		int n;
+		Scanner sc = new Scanner(System.in);
+		initStarArr();
+		
+		n = sc.nextInt();
+		checkArr(n,0,0);
+		printStarArr();	
+		
+	}
+}
